@@ -1,0 +1,15 @@
+{
+  "name": "curso-indra",
+  "version": "1.0.0",
+  "description": "curso indra",
+  "main": "index.js",
+  "scripts": {
+    "test": "test cypress"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "^9.6.1",
+    "cypress-xpath": "^1.6.2"
+  }
+}
