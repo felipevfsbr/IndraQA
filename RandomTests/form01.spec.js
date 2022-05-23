@@ -1,6 +1,7 @@
 ///<reference types='cypress' />
 describe('teste de formulario', () => {
     it('inputs', ()=>{
+        ///Preenchimento automatico de formulario com saida positiva.
         cy.visit('https://automacaocombatista.herokuapp.com/users/new');
         cy.get('#user_name').type('Felipe');
         cy.get('#user_lastname').type('Souza');
