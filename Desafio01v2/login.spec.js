@@ -4,15 +4,16 @@ describe('Teste de Login', () => {
         cy.visit('https://opensource-demo.orangehrmlive.com/');        
     });
     const usuarios = require('../../fixtures/usuarios.json');
+    const invalidos = require('../../fixtures/invalidos.json');
     usuarios.forEach(usuario => {
         it(`Autenticação de Login ${usuario.valido}`, ()=>{
             cy.get('#txtUsername').should('be.visible').type(usuario.login);
             cy.get('#txtPassword').should('be.visible').type(usuario.pwd);
             cy.get('#btnLogin').should('be.visible').click();
             cy.wait(1000)
+            cy.get('h1').should('contain.text', 'Dashboard');
     });
     });
-    const invalidos = require('../../fixtures/invalidos.json');
     invalidos.forEach(invalido => {
         it(`Autenticação de Login ${invalido.invalido}`, ()=>{
             cy.get('#txtUsername').should('be.visible').type(invalido.login);
@@ -22,8 +23,8 @@ describe('Teste de Login', () => {
             cy.wait(1000)
     });
     });
-    it('Teste de Forgot Password', ()=>{
-        //Pode falhar caso o administrador não tenha recebido uma requisição de troca de senha
+    it.only('Teste de Forgot Password', ()=>{
+        //Pode falhar caso o administrador não tenha recebido uma requisição de troca de senha, vou pensar numa maneira melhor de resolver isso.
         cy.contains('a', 'Forgot your password?').should('contain.text', 'Forgot your password?').click();
         cy.get('#securityAuthentication_userName').should('be.visible').type('Admin');
         cy.get('#btnSearchValues').should('be.visible').click();
