@@ -5,7 +5,7 @@ describe('Teste de Login', () => {
             cy.visit('https://opensource-demo.orangehrmlive.com/').loginAdmin();
             cy.get('h1').should('contain.text', 'Dashboard');
     });
-        it('Autenticação de Login' , ()=>{
+        it('Autenticação de Login Inválido' , ()=>{
             cy.get('#txtUsername').should('be.visible').type('invalido.login');
             cy.get('#txtPassword').should('be.visible').type('21312321123');
             cy.get('#btnLogin').should('be.visible').click();
