@@ -1,19 +1,24 @@
 ///<reference types='cypress' />
 describe('Teste de Login', () => {
+    beforeEach(() => {
+        cy.visit('https://opensource-demo.orangehrmlive.com/');
+            
+    });
+    it('Autenticação de Login' , ()=>{
+        cy.loginAdmin();
+        cy.get('h1').should('contain.text', 'Dashboard');
+    });
+    it('Autenticação de Login' , ()=>{
+        cy.visit('https://opensource-demo.orangehrmlive.com/')
+        cy.get('#txtUsername').should('be.visible').type('invalido.login');
+        cy.get('#txtPassword').should('be.visible').type('21312321123');
+        cy.get('#btnLogin').should('be.visible').click();
+        cy.get('#spanMessage').should('contain.text', 'Invalid credentials');
+        cy.wait(1000)
+    });
     
-        it('Autenticação de Login' , ()=>{
-            cy.visit('https://opensource-demo.orangehrmlive.com/').loginAdmin();
-            cy.get('h1').should('contain.text', 'Dashboard');
-    });
-        it('Autenticação de Login Inválido' , ()=>{
-            cy.get('#txtUsername').should('be.visible').type('invalido.login');
-            cy.get('#txtPassword').should('be.visible').type('21312321123');
-            cy.get('#btnLogin').should('be.visible').click();
-            cy.get('#spanMessage').should('contain.text', 'Invalid credentials');
-            cy.wait(1000)
-    });
-    });
     it('Teste de Forgot Password', ()=>{
+        cy.visit('https://opensource-demo.orangehrmlive.com/')
         //Pode falhar caso o administrador não tenha recebido uma requisição de troca de senha, vou pensar numa maneira melhor de resolver isso.
         cy.contains('a', 'Forgot your password?').should('contain.text', 'Forgot your password?').click();
         cy.get('#securityAuthentication_userName').should('be.visible').type('Admin');
@@ -28,4 +33,4 @@ describe('Teste de Login', () => {
         cy.get('#logInPanelHeading').should('contain.text', 'LOGIN Panel');
         cy.wait(1000)
     });
-
+});
